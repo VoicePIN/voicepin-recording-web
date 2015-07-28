@@ -1,1 +1,1 @@
-# voicepin-recording-web
+This is a module containing tools for sound recording that may help you integrate your web application with VoicePIN much faster
