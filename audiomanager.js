@@ -1,5 +1,6 @@
-/*          Created by Marek Lipert of Lambdarocket (c) 2015
- * 		          This file is owned by VoicePIN sp. z o.o.
+/*          
+ *  Created by Marek Lipert
+ *  Copyright (c) 2015 VoicePIN sp. z o.o. All rights reserved.
  *  
  *      -= Sound recording module for the web using webRTC =-
  *  
