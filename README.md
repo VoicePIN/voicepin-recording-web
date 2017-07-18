@@ -1,4 +1,4 @@
-#voicepin-recording-web
+# voicepin-recording-web
 
 ## Sound recording module for the web using webRTC
 
@@ -17,7 +17,7 @@ The recorder supports all browsers that implement:
               
 This currently (as of Jul 2015) boils down to current Firefox and Chrome
 
-##Usage instructions:
+## Usage instructions:
 
 Import in HTML file in the following sequence:
 
