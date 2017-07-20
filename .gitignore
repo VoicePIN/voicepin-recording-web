@@ -1,1 +1,6 @@
 node_modules
+target
+build
+.gradle
+voicepin-recording-web.iml
+.idea

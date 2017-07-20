@@ -1,3 +1,3 @@
 "use strict";
 
-module.exports = require("./audiomanager.js");
+module.exports = require("./build/voicepin-recording-web-all-min.js");

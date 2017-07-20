@@ -1,0 +1,59 @@
+plugins {
+    id "com.eriwen.gradle.js" version "2.14.1"
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'org.webjars'
+version = '0.2.4'
+description = """voicepin-recording-web"""
+
+repositories {
+    maven {
+        url "https://nexus.voicepin.com/repository/maven-releases/"
+    }
+}
+
+task webjar(type: Jar, dependsOn: ["jar", "minifyJs"]) {
+    from(file("${buildDir}/voicepin-recording-web-all-min.js")) {
+        into "META-INF/resources/webjars/voicepin-recording-web/${version}"
+    }
+    from(file("${rootProject.projectDir}/LICENSE.MD")) {
+        into "META-INF/resources/webjars/voicepin-recording-web/${version}"
+    }
+}
+
+build.dependsOn webjar
+uploadArchives.dependsOn webjar
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: project.repositories.maven.url) {
+                authentication(userName: "${voicepinNexusUser}", password: "${voicepinNexusPassword}")
+            }
+        }
+    }
+}
+
+task npmPublish(type: Exec) {
+    commandLine "npm", "publish"
+}
+
+combineJs {
+    encoding = "UTF-8"
+    source = [file("src/recorder.js"), file("src/audiomanager.js")]
+    dest = file("${buildDir}/voicepin-recording-web-all.js")
+}
+
+minifyJs {
+    source = combineJs
+    dest = file("${buildDir}/voicepin-recording-web-all-min.js")
+    sourceMap = file("${buildDir}/voicepin-recording-web-all.sourcemap.json")
+    closure.compilationLevel = 'WHITESPACE_ONLY'
+    closure {
+        warningLevel = 'QUIET'
+        compilerOptions.languageIn = "ECMASCRIPT5"
+    }
+}

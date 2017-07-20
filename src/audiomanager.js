@@ -130,7 +130,7 @@ var initializeRecorder = function (timeToRecordE, completion)
             audioInput = realAudioInput;
             audioInput.connect(inputPoint);
 
-            var desiredFFTSize = 0.05 /*s*/ * 8000 /*Hz */;
+            var desiredFFTSize = 0.05 /*s*/ * 16000 /*Hz */;
             var powerOfTwo = -1;
             while(Math.pow(2,++powerOfTwo) < desiredFFTSize);
             var actualFFTSize = Math.pow(2, powerOfTwo);
