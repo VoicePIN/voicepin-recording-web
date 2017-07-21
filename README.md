@@ -19,10 +19,7 @@ This currently (as of Jul 2015) boils down to current Firefox and Chrome
 
 ## Usage instructions:
 
-Import in HTML file in the following sequence:
-
-1. recorder.js
-2. audiomanager.js
+Library is available as NPM and WebJar on https://nexus.voicepin.com.
 
 First, initialize the recorder with recording time and completion:
 
@@ -55,4 +52,4 @@ To stop recording and save data use stopRecording:
 
     voicepinRecordingWeb.stopRecording();  
                 
-You can check if recording is taking place by checking 'isRecording' variable
+[Example](example/index.html)
