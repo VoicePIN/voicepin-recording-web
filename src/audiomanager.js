@@ -3,6 +3,8 @@
  *  
  */
 
+const Recorder = require("recorderjs");
+
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 var audioContext = new AudioContext();
@@ -70,7 +72,7 @@ var startRecording = function(progress, completion)
 };
 
 
-var stopRecording = function()
+function stopRecording()
 {
     if(!isRecording)
     {
@@ -156,3 +158,7 @@ var initializeRecorder = function (timeToRecordE, completion)
             completion(false, 2)
         });
 };
+
+exports.stopRecording = stopRecording
+exports.startRecording = startRecording
+exports.initializeRecorder = initializeRecorder

@@ -1,6 +1,6 @@
 {
   "name": "voicepin-recording-web",
-  "version": "0.2.4",
+  "version": "1.0.0",
   "description": "This is a module containing tools for sound recording that may help you integrate your web application with VoicePIN much faster.",
   "main": "index.js",
   "author": "",
@@ -8,7 +8,15 @@
     "url": "https://github.com/VoicePIN/voicepin-recording-web/issues"
   },
   "homepage": "https://voicepin.com",
-  "publishConfig" : {
-    "registry" : "https://nexus.voicepin.com/repository/npm/"
+  "publishConfig": {
+    "registry": "https://nexus.voicepin.com/repository/npm/"
+  },
+  "dependencies": {
+    "recorderjs": "github:mattdiamond/Recorderjs#08e7abd"
+  },
+  "scripts": {
+    "build": "npm run build:browserify",
+    "build:browserify": "browserify src/index.js --standalone voicepinRecordingWeb -o lib/voicepin-recording-web.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

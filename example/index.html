@@ -1,0 +1,48 @@
+<html>
+<script src="../lib/voicepin-recording-web.js"></script>
+<button onclick="run()">Start recording</button>
+<progress id="progress" max="5" value="0"></progress>
+<script>
+    voicepinRecordingWeb.initializeRecorder(5.0, function(success, errorCode) {
+        if (!success) {
+            var error;
+            if (errorCode == 1) {
+                error = "Incompatible browser";
+            } else if (errorCode == 2) {
+                error = "Microphone access denied";
+            }
+            var errorSpan = document.createElement("span");
+            document.body.appendChild(errorSpan);
+            errorSpan.innerHTML = error;
+        }
+    });
+
+    var saveData = (function () {
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = "display: none";
+        return function (blob, fileName) {
+            var url = window.URL.createObjectURL(blob);
+            a.href = url;
+            a.download = fileName;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        };
+    }());
+
+    function run() {
+        voicepinRecordingWeb.startRecording(function(progress, power)
+        {
+            // Code for handling UI updates here, called every 50 ms.
+            // Power is measured in dB where -160 is silence and 0 is max.
+            // Progress goes from 0 to max length.
+            document.getElementById("progress").value = progress
+        }, function(formData)
+        {
+            // Code for saving recorded file (it already sits in the formData)
+
+            saveData(formData.get("recording-file"), 'recording.wav');
+        });
+    }
+</script>
+</html>

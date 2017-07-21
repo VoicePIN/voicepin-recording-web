@@ -26,7 +26,7 @@ Import in HTML file in the following sequence:
 
 First, initialize the recorder with recording time and completion:
 
-    initializeRecorder(5.0 , function (success, errorCode)
+    voicepinRecordingWeb.initializeRecorder(5.0 , function (success, errorCode)
               {
                 if(!success) console.log(errorCode);
               });
@@ -38,7 +38,7 @@ error codes are as follows:
 
 Now, to start recording, use: 
 
-    startRecording(function(progress, power) 
+    voicepinRecordingWeb.startRecording(function(progress, power) 
                 {
                    // Code for handling UI updates here, called every 50 ms. 
                    // Power is measured in dB where -160 is silence and 0 is max.
@@ -53,6 +53,6 @@ Now, to start recording, use:
 
 To stop recording and save data use stopRecording:
 
-    stopRecording();  
+    voicepinRecordingWeb.stopRecording();  
                 
 You can check if recording is taking place by checking 'isRecording' variable
