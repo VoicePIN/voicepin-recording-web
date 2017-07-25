@@ -2,54 +2,50 @@
 
 ## Sound recording module for the web using webRTC
 
-This is a module containing tools for sound recording that may help you integrate your web application with VoicePIN much faster.
+This is a module containing tools for sound recording that may help you to integrate your web application with VoicePIN.
 
-Provided library is supplied with methods performing audio recording in suitable format for VoicePIN.com services.
-  
+Provided library supplies methods for audio recording in a format suitable for VoicePIN.com services.
+
 ___
 
-It uses recorder.js and should have it already imported to work.
+It uses [Recorder.js](https://github.com/mattdiamond/Recorderjs) and should have it already imported in order to work.
 
-The recorder supports all browsers that implement:
-             
-              * getUserMedia
-              * FormData
-              
-This currently (as of Jul 2015) boils down to current Firefox and Chrome
+The recorder supports all browsers that implement:             
+* getUserMedia
+* FormData
 
 ## Usage instructions:
 
-Library is available as NPM and WebJar on https://nexus.voicepin.com.
+Library is available as NPM and WebJar on [https://nexus.voicepin.com](https://nexus.voicepin.com/#browse/search=keyword%3D%22voicepin-recording-web%22).
 
-First, initialize the recorder with recording time and completion:
+First, initialize the recorder with recording time (in seconds) and completion handler:
 
     voicepinRecordingWeb.initializeRecorder(5.0 , function (success, errorCode)
-              {
-                if(!success) console.log(errorCode);
-              });
+    {
+        if(!success) console.log(errorCode);
+    });
               
-error codes are as follows:
+Error codes are as follows:
+* 1 - incompatible browser
+* 2 - microphone access denied
 
-           1 - incompatible browser
-           2 - microphone access denied
-
-Now, to start recording, use: 
+To start recording: 
 
     voicepinRecordingWeb.startRecording(function(progress, power) 
-                {
-                   // Code for handling UI updates here, called every 50 ms. 
-                   // Power is measured in dB where -160 is silence and 0 is max.
-                   // Progress goes from 0 to max length.
-                
-                }, function(formData) 
-                {
-                   // Code for saving recorded file (it already sits in the formData) 
-                   
-                
-                });
+        {
+            // Code for handling UI updates here, called every 50 ms. 
+            // Power is measured in dB where -160 is silence and 0 is max.
+            // Progress goes from 0 to recording time defined during initialization.
+        }, function(formData) 
+        {
+            var recordingData = formData.get("recording-file")
+            // Take actions with recorded data
+        });
 
-To stop recording and save data use stopRecording:
+To stop recording:
 
     voicepinRecordingWeb.stopRecording();  
-                
-[Example](example/index.html)
+    
+## Examples
+
+[Display progress and save file on disk](example/index.html)
