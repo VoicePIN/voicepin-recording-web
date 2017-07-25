@@ -25,22 +25,22 @@ First, initialize the recorder with recording time (in seconds) and completion h
         if(!success) console.log(errorCode);
     });
               
-Error codes are as follows:
+Possible error codes:
 * 1 - incompatible browser
 * 2 - microphone access denied
 
 To start recording: 
 
     voicepinRecordingWeb.startRecording(function(progress, power) 
-        {
-            // Code for handling UI updates here, called every 50 ms. 
-            // Power is measured in dB where -160 is silence and 0 is max.
-            // Progress goes from 0 to recording time defined during initialization.
-        }, function(formData) 
-        {
-            var recordingData = formData.get("recording-file")
-            // Take actions with recorded data
-        });
+    {
+        // Code for handling UI updates here, called every 50 ms. 
+        // Power is measured in dB where -160 is silence and 0 is max.
+        // Progress goes from 0 to recording time defined during initialization.
+    }, function(formData) 
+    {
+        var recordingData = formData.get("recording-file")
+        // Take actions with recorded data
+    });
 
 To stop recording:
 
