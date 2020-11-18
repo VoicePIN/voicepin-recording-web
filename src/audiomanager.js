@@ -64,9 +64,11 @@ var startRecording = function(progress, completion)
     if (!audioRecorder)
         return;
     isRecording = true;
+    audioContext.resume().then(() => {
+        audioRecorder.clear();
+        audioRecorder.record();
+    });
     startTime = new Date().getTime()/1000.0;
-    audioRecorder.clear();
-    audioRecorder.record();
     progressUpdate(progress);
     recordingCompletion = completion;
 };
