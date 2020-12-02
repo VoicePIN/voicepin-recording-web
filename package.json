@@ -1,6 +1,6 @@
 {
   "name": "voicepin-recording-web",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "This is a module containing tools for sound recording that may help you integrate your web application with VoicePIN much faster.",
   "main": "index.js",
   "author": "",

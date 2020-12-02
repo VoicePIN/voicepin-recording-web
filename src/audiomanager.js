@@ -102,31 +102,19 @@ function stopRecording()
 };
 
 
-var initializeRecorder = function (timeToRecordE, completion)
-{
-    function hasGetUserMedia()
-    {
-        return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
-            navigator.mozGetUserMedia || navigator.msGetUserMedia);
-    }
+var initializeRecorder = function (timeToRecordE, completion) {
 
-    if (!hasGetUserMedia())
-    {
+    if (!navigator.mediaDevices) {
         console.log("No getUserMedia in the browser")
         completion(false, 1);
         return;
     }
     timeToRecord = timeToRecordE;
-    navigator.getUserMedia  = navigator.getUserMedia ||
-                          navigator.webkitGetUserMedia ||
-                          navigator.mozGetUserMedia ||
-                          navigator.msGetUserMedia;
 
     var constraints = {video: false, audio: true};
 
-    navigator.getUserMedia(constraints,
-        function(localMediaStream)
-        {
+    navigator.mediaDevices.getUserMedia(constraints)
+        .then(function(localMediaStream) {
             inputPoint = audioContext.createGain();
 
         // Create an AudioNode from the stream.
@@ -153,9 +141,8 @@ var initializeRecorder = function (timeToRecordE, completion)
             inputPoint.connect( zeroGain );
             zeroGain.connect( audioContext.destination );
             completion(true, 0)
-        },
-        function(error)
-        {
+        })
+        .catch(function(error) {
             console.log("User denied microphone " + error)
             completion(false, 2)
         });
